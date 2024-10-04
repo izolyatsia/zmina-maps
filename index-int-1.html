@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style>
+      .map {
+      height: 100vh;
+      width: 100vw;
+    }
+    body, html {
+    padding: 0;
+    margin: 0;
+    }
+    
+    .city-label {
+      background-color: black;
+      color: white;
+      padding: 2px 5px;
+      width:max-content !important;
+      height: max-content !important;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing; 3px;
+    }
+    </style>
+  
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  </head>
+  <body>    
+    <div id="map" class="map">
+    </div>
+
+ <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+   
+  <script>
+    
+var map = L.map('map').setView([51.505, -0.09], 5);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+        var cities = [
+            { name: "Warsaw, Poland", coords: [52.2297, 21.0122] },
+            { name: "Kraków, Poland", coords: [50.0647, 19.9450] },
+            { name: "Catalonia, Spain", coords: [41.3851, 2.1734] },
+            { name: "Izyum, Ukraine", coords: [49.9935, 36.2304] },
+            { name: "Tübingen, Germany", coords: [48.5216, 9.0576] },
+            { name: "Venice, Italy", coords: [45.4408, 12.3155] },
+            { name: "Amantea, Italy", coords: [39.1333, 16.0667] },
+            { name: "Malaga, Spain", coords: [36.7213, -4.4214] },
+            { name: "Vienna, Austria", coords: [48.2082, 16.3738] },
+            { name: "Prague, Czech Republic", coords: [50.0755, 14.4378] },
+            { name: "Berlin, Germany", coords: [52.5200, 13.4050] },
+            { name: "Smolník, Slovakia", coords: [48.0234, 20.6602] },
+            { name: "Košice, Slovakia", coords: [48.7164, 21.2611] },
+            { name: "Lviv, Ukraine", coords: [49.2397, 24.1197] },
+            { name: "Paris, France", coords: [48.8566, 2.3522] },
+            { name: "Malta, Malta", coords: [35.9375, 14.3754] },
+            { name: "Berlin, Germany", coords: [52.52, 13.405] },
+        ];
+
+       cities.forEach(function(city) {
+           /* L.marker(city.coords).addTo(map)
+                .bindPopup(`<b>${city.name}</b>`)
+                .openPopup();*/
+             var label = L.divIcon({
+                className: 'city-label',
+                html: "↘ " + city.name.split(', ')[0],
+                //iconSize: [100, 20]  // Adjust label size as needed
+            });
+
+            L.marker(city.coords, { icon: label }).addTo(map);
+
+      });
+
+</script>
+  </body>
+</html>

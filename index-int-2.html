@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style>
+      .map {
+      height: 100vh;
+      width: 100vw;
+    }
+    body, html {
+    padding: 0;
+    margin: 0;
+    }
+    
+    .city-label {
+      background-color: black;
+      color: white;
+      padding: 2px 5px;
+      width:max-content !important;
+      height: max-content !important;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing; 3px;
+    }
+    </style>
+  
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  </head>
+  <body>    
+    <div id="map" class="map">
+    </div>
+
+ <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+   
+  <script>
+    
+var map = L.map('map').setView([51.505, -0.09], 5);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+        var cities = [
+           
+        { name: "Prizren, Kosovo", coords: [42.2139, 20.7397] },
+            { name: "Copenhagen, Denmark", coords: [55.6761, 12.5683] },
+            { name: "Paris, France", coords: [48.856667, 2.352222] },
+            { name: "Tbilisi, Georgia", coords: [41.7151, 44.8271] },
+            { name: "Neuwied, Germany", coords: [50.4291, 7.4706] },
+            { name: "Asturias, Spain", coords: [43.3619, -5.8494] },
+            { name: "Avignon, France", coords: [43.9493, 4.8055] },
+            { name: "Timișoara, Romania", coords: [45.7489, 21.2087] },
+            { name: "Prague, Czech Republic", coords: [50.0755, 14.4378] },
+            { name: "H. Nemce, Slovakia", coords: [49.4685, 19.0584] },
+            { name: "Split, Croatia", coords: [43.5081, 16.4402] },
+            { name: "Matera, Italy", coords: [40.6668, 16.6030] },
+            { name: "Hlynyany, Ukraine", coords: [49.8386, 24.5215] },
+            { name: "Bucharest, Romania", coords: [44.4268, 26.1025] },
+            { name: "Riga, Latvia", coords: [56.9496, 24.1052] },
+            { name: "Tallinn, Estonia", coords: [59.4370, 24.7536] },
+            { name: "Sofia, Bulgaria", coords: [42.6977, 23.3219] }
+        ];
+
+       cities.forEach(function(city) {
+           /* L.marker(city.coords).addTo(map)
+                .bindPopup(`<b>${city.name}</b>`)
+                .openPopup();*/
+             var label = L.divIcon({
+                className: 'city-label',
+                html: "↘ " + city.name.split(', ')[0],
+                //iconSize: [100, 20]  // Adjust label size as needed
+            });
+
+            L.marker(city.coords, { icon: label }).addTo(map);
+
+      });
+
+</script>
+  </body>
+</html>
